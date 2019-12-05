@@ -1,4 +1,6 @@
-public class SinglyLinkedList {
+package linkedlist;
+
+public class DoublyLinkedList {
 
     static class LinkedList {
 
@@ -11,11 +13,13 @@ public class SinglyLinkedList {
         }
 
         public void add(int data) {
+            Node newNode = new Node(data);
             if (head != null) {
-                tail.next = new Node(data);
+                newNode.prev = tail;
+                tail.next = newNode;
                 tail = tail.next;
             } else {
-                head = new Node(data);
+                head = newNode;
                 tail = head;
             }
         }
@@ -24,6 +28,7 @@ public class SinglyLinkedList {
             Node newNode = new Node(data);
             if (index == 0) {
                 newNode.next = head;
+                head.prev = newNode;
                 head = newNode;
             } else {
                 Node node = head;
@@ -32,7 +37,9 @@ public class SinglyLinkedList {
                 }
                 Node temp = node.next;
                 node.next = newNode;
+                newNode.prev = node;
                 newNode.next = temp;
+                temp.prev = newNode;
             }
         }
 
@@ -48,6 +55,7 @@ public class SinglyLinkedList {
             Node node = head;
             if (index == 0) {
                 head = node.next;
+                head.prev = null;
             } else {
                 Node prev = node;
                 for (int i = 0; i < index; i++) {
@@ -55,6 +63,7 @@ public class SinglyLinkedList {
                     node = node.next;
                 }
                 prev.next = node.next;
+                node.prev = prev.prev;
             }
         }
 
@@ -77,10 +86,12 @@ public class SinglyLinkedList {
 
         public int data;
         public Node next;
+        public Node prev;
 
         public Node(int data) {
             this.data = data;
             this.next = null;
+            this.prev = null;
         }
     }
 

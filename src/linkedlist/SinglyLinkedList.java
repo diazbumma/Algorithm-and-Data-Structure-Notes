@@ -1,4 +1,6 @@
-public class DoublyLinkedList {
+package linkedlist;
+
+public class SinglyLinkedList {
 
     static class LinkedList {
 
@@ -11,13 +13,11 @@ public class DoublyLinkedList {
         }
 
         public void add(int data) {
-            Node newNode = new Node(data);
             if (head != null) {
-                newNode.prev = tail;
-                tail.next = newNode;
+                tail.next = new Node(data);
                 tail = tail.next;
             } else {
-                head = newNode;
+                head = new Node(data);
                 tail = head;
             }
         }
@@ -26,7 +26,6 @@ public class DoublyLinkedList {
             Node newNode = new Node(data);
             if (index == 0) {
                 newNode.next = head;
-                head.prev = newNode;
                 head = newNode;
             } else {
                 Node node = head;
@@ -35,9 +34,7 @@ public class DoublyLinkedList {
                 }
                 Node temp = node.next;
                 node.next = newNode;
-                newNode.prev = node;
                 newNode.next = temp;
-                temp.prev = newNode;
             }
         }
 
@@ -53,7 +50,6 @@ public class DoublyLinkedList {
             Node node = head;
             if (index == 0) {
                 head = node.next;
-                head.prev = null;
             } else {
                 Node prev = node;
                 for (int i = 0; i < index; i++) {
@@ -61,7 +57,6 @@ public class DoublyLinkedList {
                     node = node.next;
                 }
                 prev.next = node.next;
-                node.prev = prev.prev;
             }
         }
 
@@ -84,12 +79,10 @@ public class DoublyLinkedList {
 
         public int data;
         public Node next;
-        public Node prev;
 
         public Node(int data) {
             this.data = data;
             this.next = null;
-            this.prev = null;
         }
     }
 
