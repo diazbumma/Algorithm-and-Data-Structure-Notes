@@ -10,18 +10,22 @@ public class BubbleSort {
         System.out.println(Arrays.toString(myArray));
     }
 
-    public static void bubbleSort(int[] intArray) {
-        boolean flag = true;
-        while (flag) {
-            flag = false;
-            for (int i=0; i<intArray.length-1; i++) {
-                int temp;
-                if (intArray[i]>intArray[i+1]) {
-                    temp = intArray[i];
-                    intArray [i] = intArray[i+1];
-                    intArray[i+1] = temp;
-                    flag = true;
-                }
+    public static void bubbleSort(int[] arr) {
+        int i = 0;
+        int lastIndexUnsorted = arr.length-1;
+
+        while (lastIndexUnsorted != 0) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+
+            if (i == lastIndexUnsorted-1) {
+                i = 0;
+                lastIndexUnsorted--;
+            } else {
+                i++;
             }
         }
     }
