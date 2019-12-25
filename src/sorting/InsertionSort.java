@@ -11,16 +11,18 @@ public class InsertionSort {
     }
 
     public static void insertionSort(int[] intArray) {
-        for (int i=1; i<intArray.length; i++) {
+        int length = intArray.length;
+
+        for (int i = 1; i < length; i++) {
+            int temp = intArray[i];
             int key = i;
-            int temp;
-            while (intArray[key]<intArray[key-1]) {
-                temp = intArray[key];
+
+            while (key > 0 && temp<intArray[key-1]) {
                 intArray[key] = intArray[key-1];
-                intArray[key-1] = temp;
-                if (key!=1)
-                    key--;
+                key--;
             }
+
+            intArray[key] = temp;
         }
     }
 }
