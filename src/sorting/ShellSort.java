@@ -18,7 +18,7 @@ public class ShellSort {
             int temp = intArray[i];
             int key = i;
 
-            while (key-gap >= 0 && temp < intArray[key-gap]) {
+            while (key >= gap && temp < intArray[key-gap]) {
                 intArray[key] = intArray[key-gap];
                 key -= gap;
             }
