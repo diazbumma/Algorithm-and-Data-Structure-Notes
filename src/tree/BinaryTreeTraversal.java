@@ -1,7 +1,6 @@
 package tree;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class BinaryTreeTraversal {
 
@@ -81,6 +80,41 @@ public class BinaryTreeTraversal {
         }
     }
 
+    public static void topView(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        Queue<Integer> queueLevel = new LinkedList<>();
+        TreeMap<Integer, Node> map = new TreeMap<>();
+
+        queue.add(root);
+        queueLevel.add(0);
+
+        while (!queue.isEmpty()) {
+            int currSize = queue.size();
+
+            for (int i = 0; i < currSize; i++) {
+                Node traverse = queue.poll();
+                int level = queueLevel.poll();
+
+                if (!map.containsKey(level)) {
+                    map.put(level, traverse);
+                }
+
+                if (traverse.left != null) {
+                    queue.add(traverse.left);
+                    queueLevel.add(level-1);
+                }
+                if (traverse.right != null) {
+                    queue.add(traverse.right);
+                    queueLevel.add(level+1);
+                }
+            }
+        }
+
+        for (Map.Entry<Integer, Node> item : map.entrySet()) {
+            System.out.print(item.getValue().data + " ");
+        }
+    }
+
     public static int treeHeight(Node root) {
         if (root.left==null && root.right==null) {
             return 0;
@@ -134,6 +168,10 @@ public class BinaryTreeTraversal {
 
         System.out.println("Level Order Traversal:");
         levelOrderTraversal(root);
+        System.out.print("\n");
+
+        System.out.println("Top View:");
+        topView(root);
         System.out.print("\n");
 
         System.out.println("Tree height:");
